@@ -1,0 +1,15 @@
+{
+  "HomePage": {
+    "title": "ከተለመደው ውጣ። ኢትዮጵያን አግኝ።",
+    "subtitle": "ሶስት ድንቅ መዳረሻዎች። ከዕለታዊ ውጣ ውረድ ወጥተህ ወደማይረሱ ቦታዎች እንድትጓዝ ተደርገው የተዘጋጁ የሳምንት መጨረሻ ጉዞዎች።",
+    "exploreTrips": "ጉዞዎችን ያስሱ",
+    "discoverDestinations": "መዳረሻዎችን ያግኙ"
+  },
+  "Navigation": {
+    "destinations": "መዳረሻዎች",
+    "trips": "ጉዞዎች",
+    "whyUs": "ለምን እኛ",
+    "faq": "ጥያቄዎች",
+    "exploreTrips": "ጉዞዎችን ያስሱ"
+  }
+}

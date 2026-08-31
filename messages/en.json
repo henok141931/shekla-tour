@@ -1,0 +1,15 @@
+{
+  "HomePage": {
+    "title": "Escape the ordinary. Discover Ethiopia.",
+    "subtitle": "Three remarkable destinations. Carefully curated weekend journeys designed to take you further from routine and closer to the places worth remembering.",
+    "exploreTrips": "Explore trips",
+    "discoverDestinations": "Discover destinations"
+  },
+  "Navigation": {
+    "destinations": "Destinations",
+    "trips": "Trips",
+    "whyUs": "Why Us",
+    "faq": "FAQ",
+    "exploreTrips": "Explore Trips"
+  }
+}

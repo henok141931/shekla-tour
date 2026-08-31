@@ -1,0 +1,70 @@
+import { getServerSession } from "next-auth/next";
+import { redirect } from "next/navigation";
+import { PrismaClient } from "@prisma/client";
+import { updateDestinationAction } from "@/app/actions/admin";
+import { SubmitButton } from "@/components/SubmitButton";
+
+const prisma = new PrismaClient();
+
+export default async function EditDestinationPage({ params }: { params: Promise<{ id: string }> }) {
+  const session = await getServerSession();
+  if (!session) redirect("/admin/login");
+
+  const { id } = await params;
+  
+  const dest = await prisma.destination.findUnique({
+    where: { id },
+  });
+
+  if (!dest) {
+    return <div className="p-10">Destination not found</div>;
+  }
+
+  return (
+    <div className="max-w-[600px] bg-white p-[30px] rounded-[16px] shadow-sm">
+      <h1 className="text-[28px] font-serif font-bold text-ink mb-[20px]">Edit Destination</h1>
+      
+      <form action={updateDestinationAction} className="flex flex-col gap-[20px]">
+        <input type="hidden" name="id" value={dest.id} />
+        
+        <div>
+          <label className="block text-sm font-bold text-ink mb-[5px]">Name</label>
+          <input type="text" name="name" defaultValue={dest.name} className="w-full p-[12px] border border-line rounded-[8px]" required />
+        </div>
+
+        <div>
+          <label className="block text-sm font-bold text-ink mb-[5px]">Description</label>
+          <textarea name="description" defaultValue={dest.description} className="w-full p-[12px] border border-line rounded-[8px] h-[100px]" required />
+        </div>
+
+        <div className="grid grid-cols-2 gap-[20px]">
+          <div>
+            <label className="block text-sm font-bold text-ink mb-[5px]">Theme</label>
+            <input type="text" name="theme" defaultValue={dest.theme || ""} placeholder="e.g. HIGHLANDS" className="w-full p-[12px] border border-line rounded-[8px]" />
+          </div>
+          <div>
+            <label className="block text-sm font-bold text-ink mb-[5px]">Status</label>
+            <select name="isActive" defaultValue={dest.isActive ? "true" : "false"} className="w-full p-[12px] border border-line rounded-[8px]">
+              <option value="true">Active</option>
+              <option value="false">Hidden</option>
+            </select>
+          </div>
+        </div>
+
+        <div className="border-t border-line pt-[20px] mt-[10px]">
+          <label className="block text-sm font-bold text-ink mb-[5px]">Update Hero Image</label>
+          <input type="file" name="image" accept="image/*" className="w-full p-[10px] border border-line rounded-[8px] file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-green-50 file:text-green-700 hover:file:bg-green-100" />
+          
+          {dest.heroImage && (
+            <div className="mt-[10px]">
+              <p className="text-xs text-muted mb-2">Current Image:</p>
+              <img src={dest.heroImage} alt={dest.name} className="w-full h-[150px] object-cover rounded-[8px]" />
+            </div>
+          )}
+        </div>
+
+        <SubmitButton />
+      </form>
+    </div>
+  );
+}

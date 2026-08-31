@@ -1,0 +1,41 @@
+@import "tailwindcss";
+
+@theme {
+  --color-ink: #11120f;
+  --color-paper: #f4f1e9;
+  --color-muted: #686b62;
+  --color-line: rgba(17, 18, 15, 0.14);
+  --color-green: #183d2b;
+  --color-green-light: #315d45;
+  --color-sand: #b87942;
+  --color-warm: #9b5b35;
+  --color-offwhite: #fffdf8;
+  
+  --font-sans: var(--font-dm-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-playfair), ui-serif, Georgia, serif;
+}
+
+@layer base {
+  body {
+    @apply bg-paper text-ink font-sans antialiased;
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+  }
+}
+
+@layer utilities {
+  .max-w-container {
+    max-width: min(1280px, calc(100% - 48px));
+    margin-inline: auto;
+  }
+  
+  @media (max-width: 600px) {
+    .max-w-container {
+      max-width: min(1280px, calc(100% - 32px));
+    }
+  }
+
+  .eyebrow {
+    @apply text-[11px] tracking-[0.18em] uppercase font-bold;
+  }
+}

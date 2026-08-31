@@ -1,0 +1,92 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Destination {
+  id          String   @id @default(uuid())
+  slug        String   @unique
+  name        String
+  description String
+  location    String?
+  theme       String?
+  isActive    Boolean  @default(true)
+  heroImage   String?
+  gallery     String? // Store as JSON string
+  
+  trips       Trip[]
+  leads       Lead[]
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Trip {
+  id               String   @id @default(uuid())
+  title            String
+  slug             String   @unique
+  destinationId    String
+  status           String   // 'ACTIVE', 'WAITLIST', 'SOLD_OUT', 'INACTIVE'
+  departureDate    DateTime?
+  duration         String?
+  price            Int?
+  currency         String   @default("ETB")
+  capacity         Int?
+  availableSeats   Int?
+  image            String?  // Added for trip specific images
+  itinerary        String?  // Store as JSON string
+  inclusions       String?  // Store as JSON string
+  exclusions       String?  // Store as JSON string
+  cancellationPolicy String?
+  
+  destination      Destination @relation(fields: [destinationId], references: [id], onDelete: Cascade)
+  leads            Lead[]
+
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+}
+
+model SiteSetting {
+  key       String   @id
+  value     String
+  updatedAt DateTime @updatedAt
+}
+
+model GalleryImage {
+  id        String   @id @default(uuid())
+  url       String
+  caption   String?
+  createdAt DateTime @default(now())
+}
+
+model Lead {
+  id             String   @id @default(uuid())
+  name           String
+  email          String
+  phone          String
+  travelerCount  Int?
+  message        String?
+  source         String   // 'booking', 'waitlist', 'contact'
+  status         String   @default("NEW") // 'NEW', 'CONTACTED', 'CONFIRMED', 'CANCELLED'
+  
+  tripId         String?
+  destinationId  String?
+
+  trip           Trip?        @relation(fields: [tripId], references: [id], onDelete: SetNull)
+  destination    Destination? @relation(fields: [destinationId], references: [id], onDelete: SetNull)
+
+  createdAt      DateTime @default(now())
+}
+
+model AdminUser {
+  id            String   @id @default(uuid())
+  email         String   @unique
+  passwordHash  String
+  role          String   @default("ADMIN")
+
+  createdAt     DateTime @default(now())
+}

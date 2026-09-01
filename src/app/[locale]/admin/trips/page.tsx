@@ -2,6 +2,8 @@ import { getServerSession } from "next-auth/next";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { redirect } from "next/navigation";
 import { PrismaClient } from "@prisma/client";
+import { deleteTripAction } from "@/app/actions/admin";
+import { DeleteButton } from "@/components/DeleteButton";
 
 const prisma = new PrismaClient();
 
@@ -55,6 +57,7 @@ export default async function AdminTripsPage() {
               <a href={`/en/admin/trips/${trip.id}`} className="text-sm text-center text-ink border border-line px-[15px] py-[8px] rounded-lg hover:bg-gray-50">
                 Edit
               </a>
+              <DeleteButton action={deleteTripAction} id={trip.id} entityName="trip" />
             </div>
           </div>
         )) : (

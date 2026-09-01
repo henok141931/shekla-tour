@@ -14,9 +14,25 @@ export default async function EditTripPage({ params }: { params: Promise<{ id: s
 
   const { id } = await params;
   
-  const trip = await prisma.trip.findUnique({
-    where: { id },
-  });
+  let trip = null;
+  let dbError = "";
+
+  try {
+    trip = await prisma.trip.findUnique({
+      where: { id },
+    });
+  } catch (e: any) {
+    dbError = e.message || "Unknown DB Error";
+  }
+
+  if (dbError) {
+    return (
+      <div className="p-10">
+        <h1 className="text-2xl font-bold text-red-600 mb-4">Database Connection Error</h1>
+        <pre className="bg-gray-800 text-red-400 p-4 rounded-lg overflow-auto text-xs">{dbError}</pre>
+      </div>
+    );
+  }
 
   if (!trip) {
     return <div className="p-10">Trip not found</div>;

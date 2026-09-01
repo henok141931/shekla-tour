@@ -146,3 +146,14 @@ export async function createDestinationAction(formData: FormData) {
   revalidatePath("/");
   redirect("/en/admin/destinations?updated=true");
 }
+  
+export async function deleteTripAction(formData: FormData) {  
+  const id = formData.get(" "id) as string;  
+  try { await prisma.trip.delete({ where: { id } }); } catch (e) { console.error(e); }  
+  revalidatePath(/admin/trips); revalidatePath(/); redirect(/en/admin/trips?deleted=true);  
+}  
+export async function deleteDestinationAction(formData: FormData) {  
+  const id = formData.get(id) as string;  
+  try { await prisma.destination.delete({ where: { id } }); } catch (e) { console.error(e); }  
+  revalidatePath(/admin/destinations); revalidatePath(/); redirect(/en/admin/destinations?deleted=true);  
+} 

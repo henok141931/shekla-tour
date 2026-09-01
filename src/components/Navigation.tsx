@@ -32,9 +32,8 @@ export function Navigation() {
       } ${menuOpen ? "bg-ink !text-white" : ""}`}
     >
       <div className="max-w-container flex items-center justify-between gap-[30px]">
-        <Link href="/" className="text-[20px] font-bold tracking-[-0.04em] flex items-center gap-[10px]">
-          <span className="w-[25px] h-[25px] border-[1.5px] border-current rounded-full relative after:content-[''] after:absolute after:w-[7px] after:h-[7px] after:bg-current after:rounded-full after:left-[7px] after:top-[7px]"></span>
-          BEYOND ADDIS
+        <Link href="/" className="flex items-center">
+          <img src="/logon.png" alt="Shekla Tour and Travel" className="h-[45px] w-auto" />
         </Link>
 
         {/* Desktop Nav */}

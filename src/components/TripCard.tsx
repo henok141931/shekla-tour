@@ -44,7 +44,7 @@ export function TripCard({ title, destinationName, duration, price, status, imag
         </span>
         <Link
           href={`/trips/${slug}`}
-          className="hidden sm:inline-flex mt-[14px] items-center justify-center gap-[12px] px-[21px] py-[15px] rounded-full text-[13px] font-bold transition-all border border-[#111] text-[#111] hover:bg-[#111] hover:text-white"
+          className="inline-flex mt-[14px] items-center justify-center gap-[12px] px-[21px] py-[15px] rounded-full text-[13px] font-bold transition-all border border-[#111] text-[#111] hover:bg-[#111] hover:text-white"
         >
           {status === "ACTIVE" ? "Book now" : "Notify me"} ↗
         </Link>

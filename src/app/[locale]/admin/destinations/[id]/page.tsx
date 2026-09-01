@@ -14,9 +14,25 @@ export default async function EditDestinationPage({ params }: { params: Promise<
 
   const { id } = await params;
   
-  const dest = await prisma.destination.findUnique({
-    where: { id },
-  });
+  let dest = null;
+  let dbError = "";
+
+  try {
+    dest = await prisma.destination.findUnique({
+      where: { id },
+    });
+  } catch (e: any) {
+    dbError = e.message || "Unknown DB Error";
+  }
+
+  if (dbError) {
+    return (
+      <div className="p-10">
+        <h1 className="text-2xl font-bold text-red-600 mb-4">Database Connection Error</h1>
+        <pre className="bg-gray-800 text-red-400 p-4 rounded-lg overflow-auto text-xs">{dbError}</pre>
+      </div>
+    );
+  }
 
   if (!dest) {
     return <div className="p-10">Destination not found</div>;

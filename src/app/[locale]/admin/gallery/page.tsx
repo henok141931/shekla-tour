@@ -12,9 +12,26 @@ export default async function AdminGalleryPage() {
   const session = await getServerSession(authOptions);
   if (!session) redirect("/admin/login");
 
-  const images = await prisma.galleryImage.findMany({
-    orderBy: { createdAt: "desc" },
-  });
+  let images: any[] = [];
+  let dbError = "";
+
+  try {
+    images = await prisma.galleryImage.findMany({
+      orderBy: { createdAt: "desc" },
+    });
+  } catch (e: any) {
+    dbError = e.message || "Unknown Database Error";
+  }
+
+  if (dbError) {
+    return (
+      <div className="p-10">
+        <h1 className="text-2xl font-bold text-red-600 mb-4">Database Connection Error</h1>
+        <p className="mb-4">The server failed to connect to the database. This usually means your Vercel `DATABASE_URL` is using the wrong port or address.</p>
+        <pre className="bg-gray-800 text-red-400 p-4 rounded-lg overflow-auto text-xs">{dbError}</pre>
+      </div>
+    );
+  }
 
   return (
     <div>

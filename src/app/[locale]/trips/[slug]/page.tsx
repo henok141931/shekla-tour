@@ -2,6 +2,7 @@ import { Navigation } from "@/components/Navigation";
 import { PrismaClient } from "@prisma/client";
 import { notFound } from "next/navigation";
 import { Link } from "@/i18n/routing";
+import { LeadForm } from "@/components/LeadForm";
 
 const prisma = new PrismaClient();
 
@@ -80,16 +81,11 @@ export default async function TripDetailPage({ params }: { params: Promise<{ slu
                 {trip.status === "ACTIVE" ? "Request to Book" : "Join Waitlist"}
               </h3>
               
-              <form className="flex flex-col gap-[15px]" action="/api/leads" method="POST">
-                <input type="hidden" name="tripId" value={trip.id} />
-                <input type="hidden" name="source" value={trip.status === "ACTIVE" ? "booking" : "waitlist"} />
-                <input type="text" name="name" placeholder="Your name" className="p-[14px] rounded-[12px] border border-line w-full" required />
-                <input type="email" name="email" placeholder="Email address" className="p-[14px] rounded-[12px] border border-line w-full" required />
-                <input type="tel" name="phone" placeholder="Phone number" className="p-[14px] rounded-[12px] border border-line w-full" required />
-                <button type="submit" className="bg-green text-white font-bold py-[15px] rounded-full hover:bg-green-light">
-                  Continue ↗
-                </button>
-              </form>
+              <LeadForm 
+                tripId={trip.id} 
+                source={trip.status === "ACTIVE" ? "booking" : "waitlist"} 
+                buttonLabel="Continue →" 
+              />
             </div>
           </div>
         </div>

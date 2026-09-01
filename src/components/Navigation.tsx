@@ -33,7 +33,7 @@ export function Navigation() {
     >
       <div className="max-w-container flex items-center justify-between gap-[30px]">
         <Link href="/" className="flex items-center">
-          <img src="/logon.png" alt="Shekla Tour and Travel" className="h-[45px] w-auto" />
+          <img src="/images/logon.png" alt="Shekla Tour and Travel" className="h-[45px] w-auto" />
         </Link>
 
         {/* Desktop Nav */}

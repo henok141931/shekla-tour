@@ -6,7 +6,7 @@ export function Footer() {
       <div className="max-w-container">
         <div className="flex flex-col md:flex-row justify-between gap-[50px] pb-[70px]">
           <div>
-            <img src="/logon.png" alt="Shekla Tour and Travel" className="h-[60px] w-auto mb-[15px]" />
+            <img src="/images/logon.png" alt="Shekla Tour and Travel" className="h-[60px] w-auto mb-[15px]" />
             <p className="text-[#777c75] text-[13px] max-w-[300px] mt-[12px]">
               Curated weekend escapes across Ethiopia. Go further without going away for long.
             </p>

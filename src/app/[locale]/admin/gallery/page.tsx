@@ -4,6 +4,7 @@ import { redirect } from "next/navigation";
 import { PrismaClient } from "@prisma/client";
 import { uploadGalleryImageAction, deleteGalleryImageAction } from "@/app/actions/gallery";
 import { SubmitButton } from "@/components/SubmitButton";
+import { ImageUploader } from "@/components/ImageUploader";
 
 const prisma = new PrismaClient();
 
@@ -28,13 +29,9 @@ export default async function AdminGalleryPage() {
           <h2 className="font-serif text-[22px] font-bold mb-[15px]">Upload New Photo</h2>
           <form action={uploadGalleryImageAction} className="flex flex-col gap-[20px]">
             <div>
-              <label className="block text-sm font-bold text-ink mb-[5px]">Photo</label>
-              <input 
-                type="file" 
+              <ImageUploader 
                 name="image" 
-                accept="image/*" 
-                required
-                className="w-full p-[10px] border border-line rounded-[8px] file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-green-50 file:text-green-700 hover:file:bg-green-100" 
+                label="Photo" 
               />
             </div>
             <div>

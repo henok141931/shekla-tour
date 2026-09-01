@@ -4,6 +4,7 @@ import { redirect } from "next/navigation";
 import { PrismaClient } from "@prisma/client";
 import { updateTripAction } from "@/app/actions/admin";
 import { SubmitButton } from "@/components/SubmitButton";
+import { ImageUploader } from "@/components/ImageUploader";
 
 const prisma = new PrismaClient();
 
@@ -55,16 +56,12 @@ export default async function EditTripPage({ params }: { params: Promise<{ id: s
         </div>
 
         <div className="border-t border-line pt-[20px] mt-[10px]">
-          <label className="block text-sm font-bold text-ink mb-[5px]">Update Cover Image</label>
-          <p className="text-xs text-muted mb-[10px]">Upload a new image to replace the current one.</p>
-          <input type="file" name="image" accept="image/*" className="w-full p-[10px] border border-line rounded-[8px] file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-green-50 file:text-green-700 hover:file:bg-green-100" />
-          
-          {trip.image && (
-            <div className="mt-[10px]">
-              <p className="text-xs text-muted mb-2">Current Image:</p>
-              <img src={trip.image} alt={trip.title} className="w-full h-[150px] object-cover rounded-[8px]" />
-            </div>
-          )}
+          <ImageUploader 
+            name="image" 
+            defaultImage={trip.image || undefined}
+            label="Update Cover Image" 
+            helperText="Upload a new image to replace the current one." 
+          />
         </div>
 
         <SubmitButton />

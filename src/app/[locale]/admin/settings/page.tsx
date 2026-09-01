@@ -4,6 +4,7 @@ import { redirect } from "next/navigation";
 import { PrismaClient } from "@prisma/client";
 import { updateSettingsAction } from "@/app/actions/admin";
 import { SubmitButton } from "@/components/SubmitButton";
+import { ImageUploader } from "@/components/ImageUploader";
 
 const prisma = new PrismaClient();
 
@@ -29,38 +30,20 @@ export default async function AdminSettingsPage() {
           {/* HERO IMAGE SETTING */}
           <div className="border border-line rounded-xl p-[20px]">
             <h2 className="font-serif text-[22px] font-bold mb-[10px]">Homepage Hero Image</h2>
-            <p className="text-sm text-muted mb-[15px]">This is the large background image at the very top of the homepage.</p>
-            
-            {settings.heroImage && (
-              <div className="mb-[15px]">
-                <img src={settings.heroImage} alt="Current Hero" className="w-full h-[200px] object-cover rounded-lg" />
-              </div>
-            )}
-            
-            <input 
-              type="file" 
+            <ImageUploader 
               name="heroImage" 
-              accept="image/*" 
-              className="w-full p-[10px] border border-line rounded-[8px] file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-green-50 file:text-green-700 hover:file:bg-green-100" 
+              defaultImage={settings.heroImage || undefined}
+              helperText="This is the large background image at the very top of the homepage." 
             />
           </div>
 
           {/* STORY IMAGE SETTING */}
           <div className="border border-line rounded-xl p-[20px]">
             <h2 className="font-serif text-[22px] font-bold mb-[10px]">Story Section Image</h2>
-            <p className="text-sm text-muted mb-[15px]">This is the image displayed next to "Go somewhere worth remembering".</p>
-            
-            {settings.storyImage && (
-              <div className="mb-[15px]">
-                <img src={settings.storyImage} alt="Current Story" className="w-[300px] h-[300px] object-cover rounded-lg" />
-              </div>
-            )}
-            
-            <input 
-              type="file" 
+            <ImageUploader 
               name="storyImage" 
-              accept="image/*" 
-              className="w-full p-[10px] border border-line rounded-[8px] file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-green-50 file:text-green-700 hover:file:bg-green-100" 
+              defaultImage={settings.storyImage || undefined}
+              helperText="This is the image displayed next to 'Go somewhere worth remembering'." 
             />
           </div>
 

@@ -4,6 +4,7 @@ import { redirect } from "next/navigation";
 import { PrismaClient } from "@prisma/client";
 import { createDestinationAction } from "@/app/actions/admin";
 import { SubmitButton } from "@/components/SubmitButton";
+import { ImageUploader } from "@/components/ImageUploader";
 
 export default async function NewDestinationPage() {
   const session = await getServerSession(authOptions);
@@ -45,8 +46,11 @@ export default async function NewDestinationPage() {
         </div>
 
         <div className="border-t border-line pt-[20px] mt-[10px]">
-          <label className="block text-sm font-bold text-ink mb-[5px]">Cover Image</label>
-          <input type="file" name="image" accept="image/*" className="w-full p-[10px] border border-line rounded-[8px] file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-green-50 file:text-green-700 hover:file:bg-green-100" />
+          <ImageUploader 
+            name="image" 
+            label="Destination Cover Image" 
+            helperText="Upload an engaging photo that represents this destination." 
+          />
         </div>
 
         <SubmitButton />

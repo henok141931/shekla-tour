@@ -19,7 +19,7 @@ const playfairDisplay = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  title: "Shekla Tour and Travels | Ethiopian Weekend Escapes",
+  title: "Shekla Tour and Travel | Ethiopian Weekend Escapes",
   description: "Curated Ethiopian weekend escapes to Wenchi Crater Lake, Doho Lodge and Beynouna Village.",
 };
 

@@ -25,7 +25,7 @@ export function Footer() {
               <a href="tel:+251969919548" className="block text-[13px] my-[8px] text-[#ddd] hover:text-white transition-colors">+251 96 991 9548</a>
               <a href="https://wa.me/251969919548" target="_blank" rel="noopener noreferrer" className="block text-[13px] my-[8px] text-[#ddd] hover:text-white transition-colors">WhatsApp</a>
               <a href="https://www.instagram.com/shekla_tour_and_travel/" target="_blank" rel="noopener noreferrer" className="block text-[13px] my-[8px] text-[#ddd] hover:text-white transition-colors">Instagram</a>
-              <a href="https://www.tiktok.com/@shekla_tour_and_travel" target="_blank" rel="noopener noreferrer" className="block text-[13px] my-[8px] text-[#ddd] hover:text-white transition-colors">TikTok</a>
+              <a href="https://www.tiktok.com/@shekla_tour_and_travel_" target="_blank" rel="noopener noreferrer" className="block text-[13px] my-[8px] text-[#ddd] hover:text-white transition-colors">TikTok</a>
             </div>
             <div>
               <h4 className="text-[10px] uppercase tracking-[0.15em] text-[#777c75] mb-[15px]">Legal</h4>

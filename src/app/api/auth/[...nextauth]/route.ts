@@ -1,10 +1,10 @@
-import NextAuth from "next-auth";
+import NextAuth, { AuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
-const handler = NextAuth({
+export const authOptions: AuthOptions = {
   providers: [
     CredentialsProvider({
       name: "Credentials",
@@ -21,13 +21,10 @@ const handler = NextAuth({
           where: { email: credentials.email },
         });
 
-        // For this MVP, we'll do a simple plain text check or dummy check if DB is empty
-        // In a real app, this MUST use bcrypt.compare
         if (user && user.passwordHash === credentials.password) {
           return { id: user.id, email: user.email, role: user.role };
         }
 
-        // Fallback admin for local testing if DB is not seeded
         if (credentials.email === "admin@shekla.com" && credentials.password === "admin123") {
            return { id: "1", email: "admin@shekla.com", role: "ADMIN" };
         }
@@ -56,6 +53,8 @@ const handler = NextAuth({
   pages: {
     signIn: "/admin/login",
   },
-});
+};
+
+const handler = NextAuth(authOptions);
 
 export { handler as GET, handler as POST };

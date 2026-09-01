@@ -1,4 +1,5 @@
 import { getServerSession } from "next-auth/next";
+import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { redirect } from "next/navigation";
 import { PrismaClient } from "@prisma/client";
 import { createTripAction } from "@/app/actions/admin";
@@ -7,7 +8,7 @@ import { SubmitButton } from "@/components/SubmitButton";
 const prisma = new PrismaClient();
 
 export default async function NewTripPage() {
-  const session = await getServerSession();
+  const session = await getServerSession(authOptions);
   if (!session) redirect("/admin/login");
 
   const destinations = await prisma.destination.findMany();

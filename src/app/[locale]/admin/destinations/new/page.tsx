@@ -1,11 +1,12 @@
 import { getServerSession } from "next-auth/next";
+import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { redirect } from "next/navigation";
 import { PrismaClient } from "@prisma/client";
 import { createDestinationAction } from "@/app/actions/admin";
 import { SubmitButton } from "@/components/SubmitButton";
 
 export default async function NewDestinationPage() {
-  const session = await getServerSession();
+  const session = await getServerSession(authOptions);
   if (!session) redirect("/admin/login");
 
   return (

@@ -17,16 +17,20 @@ export const authOptions: AuthOptions = {
           return null;
         }
 
-        const user = await prisma.adminUser.findUnique({
-          where: { email: credentials.email },
-        });
-
-        if (user && user.passwordHash === credentials.password) {
-          return { id: user.id, email: user.email, role: user.role };
-        }
-
         if (credentials.email === "admin@shekla.com" && credentials.password === "admin123") {
            return { id: "1", email: "admin@shekla.com", role: "ADMIN" };
+        }
+
+        try {
+          const user = await prisma.adminUser.findUnique({
+            where: { email: credentials.email },
+          });
+
+          if (user && user.passwordHash === credentials.password) {
+            return { id: user.id, email: user.email, role: user.role };
+          }
+        } catch (e) {
+          console.error("DB Auth Error:", e);
         }
 
         return null;

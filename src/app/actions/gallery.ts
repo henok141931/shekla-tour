@@ -23,7 +23,13 @@ export async function uploadGalleryImageAction(formData: FormData) {
   const fileName = `gallery_${Date.now()}.${fileExt}`;
   const filePath = `gallery/${fileName}`;
 
-  const { error } = await supabase.storage.from("images").upload(filePath, imageFile, { upsert: false });
+  const arrayBuffer = await imageFile.arrayBuffer();
+  const buffer = Buffer.from(arrayBuffer);
+
+  const { error } = await supabase.storage.from("images").upload(filePath, buffer, { 
+    contentType: imageFile.type,
+    upsert: false 
+  });
   if (error) throw new Error("Failed to upload image");
 
   const { data: publicUrlData } = supabase.storage.from("images").getPublicUrl(filePath);

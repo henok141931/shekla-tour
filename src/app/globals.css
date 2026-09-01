@@ -28,6 +28,12 @@
     max-width: min(1280px, calc(100% - 48px));
     margin-inline: auto;
   }
+
+  .hero-gradient-overlay {
+    background: linear-gradient(to bottom, rgba(11, 61, 46, 0.1) 0%, rgba(11, 61, 46, 0.4) 50%, rgba(11, 61, 46, 0.95) 100%);
+    pointer-events: none;
+    z-index: 1;
+  }
   
   @media (max-width: 600px) {
     .max-w-container {

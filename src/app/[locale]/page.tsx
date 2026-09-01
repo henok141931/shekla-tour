@@ -3,6 +3,7 @@ import { DestinationCard } from "@/components/DestinationCard";
 import { TripCard } from "@/components/TripCard";
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/routing";
+import { HeroSlider } from "@/components/HeroSlider";
 
 import { PrismaClient } from "@prisma/client";
 
@@ -26,50 +27,7 @@ export default async function Home() {
       <Navigation />
       <main>
         {/* HERO SECTION */}
-        <section className="min-h-[100svh] bg-[#17231b] relative text-white flex items-end overflow-hidden" id="home">
-          <div className="absolute inset-0">
-            <img
-              src="/images/image1.jpg"
-              alt="Ethiopian landscape"
-              className="h-full w-full object-cover brightness-[0.62] animate-[heroZoom_12s_ease-out_forwards]"
-            />
-          </div>
-          <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-black/15 to-black/75"></div>
-          <div className="relative z-10 max-w-container mx-auto pt-[150px] pb-[74px] md:pb-[45px] w-full">
-            <div className="flex justify-between items-start mb-[75px] md:mb-[70px]">
-              <div className="text-[12px] flex items-center gap-[9px]">
-                <span className="w-[7px] h-[7px] bg-white rounded-full"></span> CURATED WEEKEND ESCAPES · ETHIOPIA
-              </div>
-              <div className="font-serif text-[15px]">01 / 03</div>
-            </div>
-            <h1 className="font-serif font-medium text-[clamp(55px,17vw,85px)] sm:text-[clamp(58px,9vw,132px)] leading-[0.86] tracking-[-0.065em] max-w-[1050px]">
-              {t('title').split('.')[0]}.<br />
-              <em className="italic font-medium">{t('title').split('.')[1]}.</em>
-            </h1>
-            <div className="mt-[45px] flex flex-col md:flex-row md:justify-between md:items-end gap-[30px]">
-              <p className="max-w-[420px] text-[16px] md:text-[14px] text-white/80">
-                {t('subtitle')}
-              </p>
-              <div className="flex gap-[12px] flex-wrap">
-                <Link
-                  href="/trips"
-                  className="relative overflow-hidden inline-flex items-center justify-center gap-[12px] px-[21px] py-[15px] rounded-full text-[13px] font-bold transition-all bg-white text-[#111] hover:-translate-y-[2px]"
-                >
-                  {t('exploreTrips')} <span>↗</span>
-                </Link>
-                <Link
-                  href="/destinations"
-                  className="relative overflow-hidden inline-flex items-center justify-center gap-[12px] px-[21px] py-[15px] rounded-full text-[13px] font-bold transition-all border border-white/45 text-white hover:bg-white hover:text-[#111] hover:-translate-y-[2px]"
-                >
-                  {t('discoverDestinations')}
-                </Link>
-              </div>
-            </div>
-            <div className="hidden md:block absolute right-0 bottom-[72px] [writing-mode:vertical-rl] text-[10px] tracking-[0.18em] uppercase opacity-70">
-              Scroll to explore ↓
-            </div>
-          </div>
-        </section>
+        <HeroSlider />
         
         {/* INTRO SECTION */}
         <section className="py-[120px] bg-paper">

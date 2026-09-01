@@ -25,7 +25,8 @@ export default async function DestinationDetailPage({ params }: { params: Promis
           <p className="text-lg text-muted max-w-[600px]">{destination.description}</p>
         </div>
 
-        <div className="mb-[60px] h-[400px] rounded-[24px] overflow-hidden">
+        <div className="mb-[60px] h-[400px] rounded-[24px] overflow-hidden relative">
+          <div className="absolute inset-0 hero-gradient-overlay rounded-[24px]"></div>
           <img 
             src={destination.heroImage || "/images/image7.jpg"} 
             alt={destination.name}

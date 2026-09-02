@@ -5,9 +5,9 @@ import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/routing";
 
 const HERO_IMAGES = [
-  "/images/hero1.png",
-  "/images/hero2.png",
-  "/images/hero3.png",
+  "/images/hero1.webp",
+  "/images/hero2.webp",
+  "/images/hero3.webp",
 ];
 
 export function HeroSlider() {

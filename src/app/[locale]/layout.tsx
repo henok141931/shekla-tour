@@ -20,10 +20,34 @@ const playfairDisplay = Playfair_Display({
 
 export const metadata: Metadata = {
   title: "Shekla Tour and Travel | Ethiopian Weekend Escapes",
-  description: "Curated Ethiopian weekend escapes to Wenchi Crater Lake, Doho Lodge and Beynouna Village.",
+  description: "Curated Ethiopian weekend escapes to Wenchi Crater Lake, Doho Lodge and Beynouna Village. Forget the predictable weekend.",
+  keywords: ["Ethiopia tours", "Weekend escapes Ethiopia", "Wenchi Crater Lake", "Doho Lodge", "Shekla Tour"],
+  openGraph: {
+    title: "Shekla Tour and Travel",
+    description: "Curated Ethiopian weekend escapes designed to take you further from routine.",
+    url: "https://shekla-tour-red.vercel.app",
+    siteName: "Shekla Tour and Travel",
+    images: [
+      {
+        url: "/images/hero1.webp",
+        width: 1200,
+        height: 630,
+        alt: "Shekla Tour and Travel - Ethiopian Escapes",
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Shekla Tour and Travel",
+    description: "Curated Ethiopian weekend escapes.",
+    images: ["/images/hero1.webp"],
+  },
 };
 
 import { Footer } from '@/components/Footer';
+import { FloatingWhatsApp } from '@/components/FloatingWhatsApp';
 
 export default async function LocaleLayout({
   children,
@@ -51,6 +75,7 @@ export default async function LocaleLayout({
           <Toaster position="top-center" />
           <GlobalToastHandler />
           {children}
+          <FloatingWhatsApp />
           <Footer />
         </NextIntlClientProvider>
       </body>

@@ -3,8 +3,8 @@ const { execSync } = require('child_process');
 console.log("Setting up Supabase Connection Pool bypass...");
 
 let dbUrl = process.env.DATABASE_URL || "";
+dbUrl = dbUrl.replace(/^["']|["']$/g, ''); // Strip quotes
 
-// Create a DIRECT_URL for prisma db push by enforcing port 5432
 let directUrl = dbUrl.replace(':6543', ':5432').replace('?pgbouncer=true', '').replace('&pgbouncer=true', '');
 if (!directUrl.includes('connection_limit=1')) {
   directUrl += directUrl.includes('?') ? '&connection_limit=1' : '?connection_limit=1';

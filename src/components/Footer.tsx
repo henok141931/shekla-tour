@@ -36,7 +36,17 @@ export function Footer() {
         </div>
         <div className="border-t border-white/10 pt-[22px] flex flex-col sm:flex-row justify-between text-[#666b65] text-[11px] gap-[8px]">
           <span>© {new Date().getFullYear()} Shekla Tour and Travel. All rights reserved.</span>
-          <span>Designed & developed by MMCY Tech</span>
+          <span>
+            Designed & developed by{" "}
+            <a 
+              href="https://tiletcreatives.site" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="text-[#888c87] hover:text-white transition-colors underline underline-offset-2"
+            >
+              tiletcreatives
+            </a>
+          </span>
         </div>
       </div>
     </footer>

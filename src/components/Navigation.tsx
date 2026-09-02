@@ -2,13 +2,14 @@
 
 import { useState, useEffect } from "react";
 import { Link, usePathname } from "@/i18n/routing";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 
 export function Navigation() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const t = useTranslations("Navigation");
   const pathname = usePathname();
+  const currentLocale = useLocale();
 
   // If we are on the homepage, the nav sits over a dark hero image. 
   // Otherwise, it sits over the light beige page background.
@@ -37,7 +38,7 @@ export function Navigation() {
         </Link>
 
         {/* Desktop Nav */}
-        <div className="hidden md:flex gap-[30px] text-[13px] font-medium">
+        <div className="hidden md:flex gap-[30px] text-[13px] font-medium items-center">
           <Link href="/destinations" className="opacity-80 hover:opacity-100 transition-opacity duration-200">
             {t("destinations")}
           </Link>
@@ -52,16 +53,29 @@ export function Navigation() {
           </Link>
         </div>
 
-        <Link
-          href="/trips"
-          className={`hidden md:inline-block px-[17px] py-[11px] rounded-full text-[12px] font-bold transition-colors ${
-            isDarkText 
-              ? "bg-ink text-white hover:bg-black" 
-              : "bg-white text-[#111] hover:bg-gray-100"
-          }`}
-        >
-          {t("exploreTrips")} ↗
-        </Link>
+        <div className="hidden md:flex items-center gap-[20px]">
+          {/* Desktop Language Switcher */}
+          <div className="flex items-center gap-[6px] text-[12px] font-medium opacity-90">
+            <Link href={pathname} locale="en" className={currentLocale === 'en' ? 'font-bold underline underline-offset-4' : 'opacity-60 hover:opacity-100'}>
+              EN
+            </Link>
+            <span className="opacity-40">|</span>
+            <Link href={pathname} locale="am" className={currentLocale === 'am' ? 'font-bold underline underline-offset-4' : 'opacity-60 hover:opacity-100'}>
+              አማ
+            </Link>
+          </div>
+
+          <Link
+            href="/trips"
+            className={`px-[17px] py-[11px] rounded-full text-[12px] font-bold transition-colors ${
+              isDarkText 
+                ? "bg-ink text-white hover:bg-black" 
+                : "bg-white text-[#111] hover:bg-gray-100"
+            }`}
+          >
+            {t("exploreTrips")} ↗
+          </Link>
+        </div>
 
         {/* Mobile Menu Button */}
         <button
@@ -88,6 +102,16 @@ export function Navigation() {
           <Link href="/faq" onClick={() => setMenuOpen(false)}>
             {t("faq")}
           </Link>
+          
+          <div className="mt-[15px] pt-[15px] border-t border-white/10 flex items-center gap-[12px] text-[14px]">
+            <Link href={pathname} locale="en" onClick={() => setMenuOpen(false)} className={currentLocale === 'en' ? 'font-bold underline underline-offset-4' : 'opacity-60'}>
+              English (EN)
+            </Link>
+            <span className="opacity-40">|</span>
+            <Link href={pathname} locale="am" onClick={() => setMenuOpen(false)} className={currentLocale === 'am' ? 'font-bold underline underline-offset-4' : 'opacity-60'}>
+              አማርኛ (AM)
+            </Link>
+          </div>
         </div>
       )}
     </nav>

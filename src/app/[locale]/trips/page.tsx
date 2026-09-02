@@ -2,10 +2,13 @@ import { PrismaClient } from "@prisma/client";
 import { Navigation } from "@/components/Navigation";
 import { TripCard } from "@/components/TripCard";
 import { Link } from "@/i18n/routing";
+import { getTranslations } from "next-intl/server";
 
 const prisma = new PrismaClient();
 
 export default async function TripsGalleryPage() {
+  const t = await getTranslations("Trips");
+  
   let upcomingTrips: any[] = [];
   let galleryImages: any[] = [];
 
@@ -30,9 +33,10 @@ export default async function TripsGalleryPage() {
         
         {/* Upcoming Escapes Section */}
         <section className="mb-[100px]">
-          <div className="eyebrow">Upcoming Escapes</div>
+          <div className="eyebrow">{t("allTrips")}</div>
           <h1 className="font-serif font-medium text-[clamp(48px,5vw,72px)] leading-[0.92] tracking-[-0.055em] mt-[10px] mb-[40px]">
-            Join the next <em className="italic">journey.</em>
+            {t("title").split('.')[0]}.<br />
+            <em className="italic">{t("title").split('.')[1] || ""}</em>
           </h1>
           
           <div className="grid gap-[20px]">

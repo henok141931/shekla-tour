@@ -15,7 +15,7 @@ export function TripCard({ title, destinationName, duration, price, status, imag
 
   return (
     <article className="bg-offwhite rounded-[20px] p-[14px] flex flex-col sm:grid sm:grid-cols-[180px_1fr_auto] gap-[22px] items-center transition-all duration-300 shadow-[0_2px_0_rgba(0,0,0,0.03)] hover:-translate-y-[3px] hover:shadow-[0_15px_35px_rgba(0,0,0,0.08)]">
-      <div className="h-[150px] w-full sm:w-auto rounded-[14px] overflow-hidden">
+      <div className="h-[250px] sm:h-[150px] w-full rounded-[14px] overflow-hidden">
         <img src={image} alt={title} className="h-full w-full object-cover" />
       </div>
       <div className="w-full text-center sm:text-left">

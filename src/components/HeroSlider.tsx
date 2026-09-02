@@ -4,10 +4,10 @@ import { useState, useEffect } from "react";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/routing";
 
-const HERO_IMAGES = [
-  "/images/hero1.webp",
-  "/images/hero2.webp",
-  "/images/hero3.webp",
+const HERO_SLIDES = [
+  { desktop: "/images/hero1.webp", mobile: "/images/hero1.webp" },
+  { desktop: "/images/hero2.webp", mobile: "/images/image8.jpg" },
+  { desktop: "/images/hero3.webp", mobile: "/images/image3.jpg" },
 ];
 
 export function HeroSlider() {
@@ -16,7 +16,7 @@ export function HeroSlider() {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 1) % HERO_IMAGES.length);
+      setCurrentIndex((prev) => (prev + 1) % HERO_SLIDES.length);
     }, 6000); // 6 seconds per slide
     return () => clearInterval(interval);
   }, []);
@@ -24,16 +24,20 @@ export function HeroSlider() {
   return (
     <section className="min-h-[100svh] bg-[#0B3D2E] relative text-white flex items-end overflow-hidden" id="home">
       {/* Background Images with Crossfade */}
-      {HERO_IMAGES.map((src, index) => (
+      {HERO_SLIDES.map((slide, index) => (
         <div 
-          key={src} 
+          key={index} 
           className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${index === currentIndex ? 'opacity-100 z-0' : 'opacity-0 -z-10'}`}
         >
-          <img
-            src={src}
-            alt={`Hero ${index + 1}`}
-            className={`h-full w-full object-cover ${index === currentIndex ? 'animate-[heroZoom_12s_ease-out_forwards]' : ''}`}
-          />
+          <picture>
+            <source media="(max-width: 767px)" srcSet={slide.mobile} />
+            <source media="(min-width: 768px)" srcSet={slide.desktop} />
+            <img
+              src={slide.desktop}
+              alt={`Hero ${index + 1}`}
+              className={`h-full w-full object-cover ${index === currentIndex ? 'animate-[heroZoom_12s_ease-out_forwards]' : ''}`}
+            />
+          </picture>
         </div>
       ))}
 
@@ -50,7 +54,7 @@ export function HeroSlider() {
             <span className="leading-tight">CURATED WEEKEND ESCAPES IN ETHIOPIA</span>
           </div>
           <div className="font-serif text-[14px] md:text-[15px] shrink-0">
-            0{currentIndex + 1} / 0{HERO_IMAGES.length}
+            0{currentIndex + 1} / 0{HERO_SLIDES.length}
           </div>
         </div>
         
